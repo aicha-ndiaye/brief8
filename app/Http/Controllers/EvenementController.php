@@ -40,8 +40,22 @@ class EvenementController extends Controller
      */
     public function store()
     {
-        $event=Evenement::all();
+        $event=Evenement::all();     //lister les evenements
         return view ('pageAdmin',compact('event'));
+    }
+
+
+
+    public function voirplus($id ){
+        $event=Evenement::FindOrFail($id);
+        return view('voirplus',compact('event'));
+
+
+    }
+
+    public function edit($id){
+        $event=Evenement::FindOrFail($id);
+        return view('modifieEvent',compact('event'));
     }
 
     /**
@@ -55,9 +69,10 @@ class EvenementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function modifier( $id)
     {
-        //
+        $evenement=Evenement::FindOrFail($id);
+        return view('modifieEvent',compact('evenement'));
     }
 
     /**
@@ -65,14 +80,29 @@ class EvenementController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $evenement = Evenement::find($id);
+        $evenement->libelle=$request->libelle;
+        $evenement->dateEvenement=$request->dateEvenement;
+        $evenement->statu=$request->statu;
+        $evenement->nombre_de_passe=$request->nombre_de_passe;
+        $evenement->adresse=$request->adresse;
+        $evenement->image=$request->image;
+        $evenement->description=$request->description;
+        $evenement->date_limite_inscription=$request->date_limite_inscription;
+        if ($evenement->update()) {
+            return redirect('/pageAdmin');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(Request $req)
     {
-        //
+        $evenement= Evenement::FindOrFail($req->id);
+        if($evenement->delete()) {
+         return back() ;
+
+       }
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\EvenementController;
+use App\Models\Evenement;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,17 +37,21 @@ Route::get('/formassociation', function () {
 Route::get('/pageUser', function () {
     return view('pageUser');
 });
-Route::get('/pageAdmin', function () {
-    return view('pageAdmin');
-});
+
+// Route::get('/voirplus', function () {
+//     return view('voirplus');
+// });
+
 Route::get('/ajoutEvenement', function () {
     return view('ajoutEvenement');
 });
+Route::post('/auth',[UserController::class,'authenticate']);
 
-Route::middleware(['auth'])->group(function () {
-
+Route::middleware(['auth','role:admin'])->group(function () {
+    Route::get('/pageAdmin', function () {
+        return view('pageAdmin');
+    });
 });
-
 
 
 
@@ -64,5 +69,10 @@ Route::post('/assos',[AssociationController::class,'authenticate']);
 Route::get('/ajoutEvenement',[EvenementController::class,'index']);
 Route::post('/ajout',[EvenementController::class,'create']);
 Route::get('/pageAdmin',[EvenementController::class,'store']);
+
+Route::get('/voirplus/{id}',[EvenementController::class,'voirplus']);
+Route::post('/modifieEvent/{id}',[EvenementController::class,'update']);
+Route::get('/modification/{evenement}',[EvenementController::class,'modifier']);
+Route::get('/supprimerEve/{id}',[EvenementController::class,'delete']);
 
 

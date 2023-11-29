@@ -60,12 +60,16 @@ class AssociationController extends Controller
             'password' => 'required',
         ]);
 
-        $admin = Association::where('email', $request->email)->first();
+        $user = Association::where('email', $request->email)->first();
 
+        if ($user && Hash::needsRehash($user->password)) {
+        
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
 
-
-        if ($admin && Hash::check($request->password, $admin->password)) {
-            Auth::login($admin);
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
             $request->session()->regenerate();
             return redirect()->intended('pageAdmin');
         }
