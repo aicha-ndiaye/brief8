@@ -11,26 +11,24 @@
 </head>
 <body>
     <div class="registration-form">
-        <form method="post" action="auth">
+        <form method="post" action="/assos">
             @csrf
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
+            <div class="form-group">
+                <input type="email" class="form-control item" name="email" id="email" placeholder="votre email">
 
             <div class="form-group">
-                <input type="text" class="form-control item"  name="email" id="email" placeholder="Email">
+                <input type="password" class="form-control item" name="password" id="password" placeholder="votre mot de passe">
             </div>
+
             <div class="form-group">
-                <input type="password" class="form-control item" name="password" id="password" placeholder="mot de passe">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-block create-account">se connecter</button>
-            </div>
-            <div class="form-group">
-                <a href="/inscription">
-                <button type="submit" class="btn btn-block create-account">inscrivez-vous si vous n'avez pas de compte</button>
+                <a href="">
+                <button type="submit" class="btn btn-block create-account">s'inscrire</button>
             </a>
             </div>
+
         </form>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

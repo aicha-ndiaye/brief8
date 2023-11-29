@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Association;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +20,49 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/inscription', function () {
-    return view('inscription');
-});
+
 Route::get('/connexion', function () {
     return view('connexion');
+});
+Route::get('/pageUser', function () {
+    return view('pageUser');
 });
 Route::get('/dashbord', function () {
     return view('dashbord');
 });
+Route::get('/formassociation', function () {
+    return view('formassociation');
+});
+Route::get('/pageUser', function () {
+    return view('pageUser');
+});
+Route::get('/pageAdmin', function () {
+    return view('pageAdmin');
+});
+Route::get('/ajoutEvenement', function () {
+    return view('ajoutEvenement');
+});
+
+Route::middleware(['auth'])->group(function () {
+
+});
+
+
+
+
+
+Route::get('/inscription',[UserController::class,'create']);
+Route::post('/inscriptionUser',[UserController::class,'store']);
+Route::post('/connexion',[UserController::class,'connexion']);
+Route::post('/auth',[UserController::class,'authenticate']);
+
+Route::get('/formassociation',[AssociationController::class,'create']);
+Route::post('/formasso',[AssociationController::class,'store']);
+Route::get('/connecterassos',[AssociationController::class,'connecter']);
+Route::post('/assos',[AssociationController::class,'authenticate']);
+
+Route::get('/ajoutEvenement',[EvenementController::class,'index']);
+Route::post('/ajout',[EvenementController::class,'create']);
+Route::get('/pageAdmin',[EvenementController::class,'store']);
+
+

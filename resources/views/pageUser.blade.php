@@ -30,23 +30,15 @@
                             <li class="nav-item"> <a class="nav-link" href="#">Contact</a> </li>
 
                         </ul>
-                        <a href="/connexion">
-                        <div class="btn btn-dark">connectez vous</div>
-                    </a>
+                        <div class="btn btn-dark">Sign up </div>
                     </div>
                 </div>
             </nav>
-            <div class="mt-3 d-flex justify-content-center"> <span class="heading">Page Acceuil</span> </div>
-            <div class="d-flex justify-content-center"> <span class="text">evenement</span> </div>
-            <div class="mt-5 d-flex justify-content-center"> <span class="text1">si vous etes une association connectez vous ici👇 </span> </div>
-            <div class="mt-6 text-center">
-                <a href="/formassociation" class="btn btn-success btn-lg btn-block">
-                    Connectez
-                </a>
-            </div>
-            >
-
-
+            <div class="mt-3 d-flex justify-content-center"> <span class="heading">profil client</span> </div>
+            <div class="d-flex justify-content-center"> <span class="text">user</span> </div>
+            <div class="mt-3 d-flex justify-content-center"> <span class="text1">vous pouvez reservez ici tous vos evenements prefere </span> </div>
+            <div class=" mt-3 d-flex justify-content-center gap-3">
+                <div class="btn btn-success">Get Started</div>
 
             </div>
             <div class="row mt-3 p-2 g-3 d-flex justify-content-center">

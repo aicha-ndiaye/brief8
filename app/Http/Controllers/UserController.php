@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,16 +22,70 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('inscription');
     }
 
     /**
      * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+     */ public function store(Request $request)
     {
-        
+        // $request->validate([
+        //     'nom' => 'required|min:2|max:20',
+        //     'prenom' => 'required|min:2|max:20',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => [
+        //         'required',
+        //         'regex:/^(?=.*[A-Z])(?=.*\d).{2,}$/',
+        //     ],
+        //     'telephone' => [
+        //         'required',
+        //         'regex:/^(77|78|76|70|75)\d{10}$/',
+        //     ],
+        // ]);
+
+        $user = new User();
+        $user->nom = $request->nom;
+        $user->prenom = $request->prenom;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->telephone = $request->telephone;
+        $user->role = 'user';
+
+        if ($user->save()) {
+            return redirect('/connexion');
+        }
     }
+
+
+
+    //partie connexion
+    public function connexion()
+    {
+        return view('connexion');
+    }
+
+    public function authenticate(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('pageAdmin');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+
+
+
 
     /**
      * Display the specified resource.

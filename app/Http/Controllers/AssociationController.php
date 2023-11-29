@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Association;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AssociationController extends Controller
 {
@@ -19,7 +22,7 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        //
+        return view('formassociation');
     }
 
     /**
@@ -27,7 +30,47 @@ class AssociationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $assos = new Association();
+        $assos->nom = $request->nom;
+        $assos->date_creation= $request->date_creation;
+        $assos->slogan = $request->slogan;
+        $assos->password = $request->password;
+        $assos->logo = $request->logo;
+        $assos->email = $request->email;
+
+
+        if ($assos->save()) {
+            return redirect('/connecterassos');
+        }
+    }
+    public function connecter()
+    {
+        return view('connecterassos');
+    }
+
+
+    public function authenticate(Request $request)
+    {
+
+
+
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $admin = Association::where('email', $request->email)->first();
+
+
+
+        if ($admin && Hash::check($request->password, $admin->password)) {
+            Auth::login($admin);
+            $request->session()->regenerate();
+            return redirect()->intended('pageAdmin');
+        }
+
+
     }
 
     /**

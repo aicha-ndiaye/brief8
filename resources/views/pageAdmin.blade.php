@@ -30,32 +30,29 @@
                             <li class="nav-item"> <a class="nav-link" href="#">Contact</a> </li>
 
                         </ul>
-                        <a href="/connexion">
-                        <div class="btn btn-dark">connectez vous</div>
-                    </a>
+                        <div class="btn btn-dark">Sign up </div>
                     </div>
                 </div>
             </nav>
-            <div class="mt-3 d-flex justify-content-center"> <span class="heading">Page Acceuil</span> </div>
-            <div class="d-flex justify-content-center"> <span class="text">evenement</span> </div>
-            <div class="mt-5 d-flex justify-content-center"> <span class="text1">si vous etes une association connectez vous ici👇 </span> </div>
-            <div class="mt-6 text-center">
-                <a href="/formassociation" class="btn btn-success btn-lg btn-block">
-                    Connectez
-                </a>
-            </div>
-            >
-
-
+            <div class="mt-3 d-flex justify-content-center"> <span class="heading">profil association</span> </div>
+            <div class="d-flex justify-content-center"> <span class="text">assoc</span> </div>
+            <div class="mt-3 d-flex justify-content-center"> <span class="text1">ajouter evenements </span> </div>
+            <div class=" mt-3 d-flex justify-content-center gap-3">
+                <div class="btn btn-success">Get Started</div>
 
             </div>
+            <h4>liste des evenements</h4> <br>
+            <!-- Property List Start -->
+            <div class="row">
+                @foreach ($event as $events)
             <div class="row mt-3 p-2 g-3 d-flex justify-content-center">
 
 
                 <div class="col-md-4">
                     <div class="card2 p-2 py-3">
                         <div class="text-center d-flex flex-column align-items-center">
-                            <div> <img src=" https://i.imgur.com/C4CUnKG.png" height="50px" width="50px" /> </div> <span class="stellar">Pro Business</span> <span class="hosting">Shared Hosting</span> <span class="price mt-2">34567<span class="small"> /mo</span></span> <span class="year">On first year</span> <button class="btn3 btn-success mt-2">Get Started</button>
+                            <div> <img src=" https://i.imgur.com/C4CUnKG.png" height="50px" width="50px" /> </div> <span class="stellar">{{$events->libelle}}</span> <span class="hosting">Shared Hosting</span> <span class="price mt-2">{{$events->nombre_de_passe}}<span class="small"> /places</span></span> <span class="year">{{$events->statu}}</span>
+                            <button class="btn3 btn-success mt-2">voir plus</button>
                         </div>
                     </div>
                 </div>
@@ -63,3 +60,6 @@
         </div>
     </div>
 </div>
+@endforeach
+
+
