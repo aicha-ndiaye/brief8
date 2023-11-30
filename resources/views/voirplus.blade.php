@@ -55,7 +55,7 @@
                 <div class="text-center d-flex flex-column align-items-center">
                     <a href=""><img class="img-fluid" src="{{ asset('assets/img/'.$event->image)}}" alt=""></a>
                     <span class="stellar">{{$event->libelle}}</span>
-                    <span class="hosting">Shared Hosting</span>
+                   
                     <p>{{$event->description}}</p>
                     <span class="price mt-2">{{$event->nombre_de_passe}}<span class="small"> /places</span></span>
                     <span class="year">{{$event->statu}}</span>

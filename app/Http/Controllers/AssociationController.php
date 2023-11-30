@@ -34,7 +34,7 @@ class AssociationController extends Controller
         $assos->nom = $request->nom;
         $assos->date_creation= $request->date_creation;
         $assos->slogan = $request->slogan;
-        $assos->password = $request->password;
+        $assos->password = Hash::make($request->password);
         $assos->logo = $request->logo;
         $assos->email = $request->email;
 
@@ -55,24 +55,17 @@ class AssociationController extends Controller
 
 
 
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $user = Association::where('email', $request->email)->first();
-
-        if ($user && Hash::needsRehash($user->password)) {
-        
-            $user->password = Hash::make($request->password);
-            $user->save();
-        }
-
-        if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-            $request->session()->regenerate();
+        $test=auth()->guard('association')->attempt(['email'=>$request->email,'password'=>$request->password]);
+        //dd($test);
+        if($test){
             return redirect()->intended('pageAdmin');
         }
+      
 
 
     }

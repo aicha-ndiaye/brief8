@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Evenement;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,7 +77,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('pageAdmin');
+            return redirect()->intended('pageUser');
         }
 
         return back()->withErrors([
@@ -90,10 +92,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $event=Evenement::all();
+
+        return view('pageUser',compact('event'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

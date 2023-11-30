@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -23,10 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'telephone',
-        'role'
-        // Exemple avec $fillable
-
-
+        'role',
     ];
 
     /**
@@ -48,4 +45,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Définition de la relation avec la table de pivot "reservation".
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function evenements(): BelongsToMany
+    {
+        return $this->belongsToMany(Evenement::class, 'reservation', 'user_id', 'evenement_id')
+            ->withPivot('nomInteresse', 'dateEvenement', 'nombrePlace')
+            ->withTimestamps();
+    }
 }

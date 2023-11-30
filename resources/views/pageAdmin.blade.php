@@ -90,7 +90,7 @@
                                 <a class="nav-link active" aria-current="page" href="ajoutEvenement"><span class="home">ajouter un evenement</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="">home</a>
+                                <a class="nav-link active" href="/listeReservation">liste des reservations</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Services</a>
@@ -116,6 +116,7 @@
             <!-- Property List Start -->
             <div class="row mt-3 p-2 g-3">
                 @foreach ($event as $events)
+                @if($events->association->id ==auth()->guard('association')->user()->id)
                     <div class="col-md-4">
                         <div class="card2 p-2 py-3">
                             <div class="text-center d-flex flex-column align-items-center">
@@ -134,7 +135,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endforeach
+
             </div>
         </div>
     </div>

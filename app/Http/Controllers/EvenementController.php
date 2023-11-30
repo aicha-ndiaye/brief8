@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvenementController extends Controller
 {
@@ -29,9 +30,14 @@ class EvenementController extends Controller
         $evenement->image=$request->image;
         $evenement->description=$request->description;
         $evenement->date_limite_inscription=$request->date_limite_inscription;
+        $evenement->association_id=auth()->guard('association')->user()->id;
         if ($evenement->save()) {
             return redirect('/pageAdmin');
         }
+        // if (!Auth::user()->association_id) {
+        //     return redirect('/')->with('error', 'Vous devez être associé à une association pour créer un événement.');
+        // }
+
 
     }
 

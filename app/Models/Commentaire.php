@@ -9,3 +9,4 @@ class Commentaire extends Model
 {
     use HasFactory;
 }
+

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
 class ReservationController extends Controller
 {
@@ -11,15 +13,22 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('reservation');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+        public function Reservations($userId)
+        {
+            $user = User::findOrFail($userId);
+
+            foreach ($user->roles as $evenement) {
+                foreach ($evenement->reservation as $reservation) {
+                    return view('user.reservations', ['reservations' => $reservation]);
+                }
+            }
+
     }
 
     /**
@@ -27,23 +36,34 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $reserver = new Reservation();
+        $reserver->nomInteresse=$request->nomInteresse;
+        $reserver->nombrePlace=$request->nombrePlace;
+        $reserver->user_id=auth()->guard('association')->user()->id;
+        $reserver->evenement_id=auth()->guard('association')->user()->id;
+        if ($reserver->save()) {
+            return redirect('/pagemsg');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('listeReservation');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function listeReserv()
     {
-        //
+        $reserve=Reservation::all();
+
+        return view('listeReservation',compact('reserve'));
     }
 
     /**

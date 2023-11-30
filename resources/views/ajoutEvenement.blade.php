@@ -72,6 +72,9 @@
                 <label for="date limite de linscription" class="form-control">Date limite d'inscription</label>
                 <input type="date" class="form-control" id="date" name="date_limite_inscription" placeholder="Date limite d'inscription">
             </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" value="{{auth()->guard('association')->user()->id}}" name="association_id" id="association_id" >
+            </div>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-block create-account">Ajouter</button>

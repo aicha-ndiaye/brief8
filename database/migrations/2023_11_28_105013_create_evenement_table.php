@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evenement', function (Blueprint $table) {
+        Schema::create('evenements', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
             $table->date('date_limite_inscription');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('statu',['ouvert','ferme']);
             $table->date('dateEvenement');
             $table->integer('nombre_de_passe');
+            $table->foreignId('association_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('adresse');
             $table->timestamps();
         });
