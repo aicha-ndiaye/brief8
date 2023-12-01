@@ -45,10 +45,11 @@
                 <input type="number" name="nombrePlace" class="form-control" value="" id="nombrePlace" placeholder="nombre de place">
             </div>
             <div class="form-group">
-                <input type="hidden" class="form-control" value="{{auth()->guard('association')->user()->id}}" name="association_id " id="association_id" >
+                <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
+
             </div>
             <div class="form-group">
-                <input type="hidden" class="form-control" value="{{{auth()->guard('association')->user()->id}}}" name="user_id " id="user_id" >
+                <input type="hidden" class="form-control" value="{{auth()->user()->id}}" name="user">
             </div>
 
             <div class="form-group">

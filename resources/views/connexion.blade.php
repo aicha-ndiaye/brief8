@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="registration-form">
-        <form method="post" action="auth">
+        <form method="post" action="/auth">
             @csrf
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>

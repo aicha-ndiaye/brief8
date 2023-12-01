@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Evenement;
 use App\Models\Reservation;
+use App\Notifications\confirmation_de_reservation;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
 
 class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        return view('reservation');
+        $evenement=Evenement::find($id);
+        return view('reservation',compact('evenement'));
     }
 
     /**
@@ -34,16 +37,18 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        // dd($request);
+    // dd($request);
 
         $reserver = new Reservation();
+        $user=User::FindOrFail($request->user);
         $reserver->nomInteresse=$request->nomInteresse;
         $reserver->nombrePlace=$request->nombrePlace;
-        $reserver->user_id=auth()->guard('association')->user()->id;
-        $reserver->evenement_id=auth()->guard('association')->user()->id;
+        $reserver->user_id=$request->user;
+        $reserver->evenement_id=$request->evenement_id;
         if ($reserver->save()) {
+            $user->notify(new confirmation_de_reservation());
             return redirect('/pagemsg');
         }
     }
@@ -61,8 +66,7 @@ class ReservationController extends Controller
      */
     public function listeReserv()
     {
-        $reserve=Reservation::all();
-
+        $reserve=Reservation::where('evenement_id',auth()->guard('association')->user()->id)->get();
         return view('listeReservation',compact('reserve'));
     }
 

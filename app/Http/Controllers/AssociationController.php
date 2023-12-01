@@ -61,13 +61,18 @@ class AssociationController extends Controller
         ]);
 
         $test=auth()->guard('association')->attempt(['email'=>$request->email,'password'=>$request->password]);
-        //dd($test);
+
         if($test){
-            return redirect()->intended('pageAdmin');
+            // dd($test);
+            return redirect()->intended('/pageAdmin');
         }
-      
 
 
+
+    }
+    public function logout(){
+        auth()->guard('association')->logout();
+        return redirect('/connecterassos');
     }
 
     /**

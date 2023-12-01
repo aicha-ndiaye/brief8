@@ -80,7 +80,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <img src="https://i.imgur.com/hSDDP67.png" height="100px" width="100px" />
-                    <a class="navbar-brand name" href="#">Cloud<span class="go">Go</span></a>
+                    <a class="navbar-brand name" href="#">{{auth()->guard('association')->user()->nom}}</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -99,7 +99,11 @@
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                         </ul>
-                        <div class="btn btn-dark">deconnexion</div>
+                        <a href="#" class="btn btn-dark" onclick="document.getElementById('form-logout').submit()">
+                            <form action="/deconnexionAssociation" method="post" id="form-logout">@csrf</form>
+                            Se Déconnecter
+                        </a>
+
                     </div>
                 </div>
             </nav>

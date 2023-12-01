@@ -51,6 +51,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->telephone = $request->telephone;
+        $user->image = $request->image;
         $user->role = 'user';
 
         if ($user->save()) {
@@ -97,6 +98,11 @@ class UserController extends Controller
         $event=Evenement::all();
 
         return view('pageUser',compact('event'));
+    }
+
+    public function logout(){
+        auth()->logout();
+        return redirect('/connexion');
     }
 
 

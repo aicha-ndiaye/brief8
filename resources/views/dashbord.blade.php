@@ -44,7 +44,12 @@
                     Connectez
                 </a>
             </div>
-            >
+            {{-- <script>
+                function showAlert() {
+                    alert("Veuillez vous connecter pour ajouter un commentaire.");
+                    return false;
+                }
+            </script> --}}
 
 
 

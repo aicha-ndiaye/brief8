@@ -40,6 +40,15 @@
         .table-hover tbody tr:hover {
             background-color: rgba(0, 0, 0, 0.075);
         }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .action-buttons button {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -51,21 +60,30 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Nombre de places</th>
                     <th scope="col">Nom de l'evenement</th>
-                    <th scope="col">date de l'evenement</th>
+                    <th scope="col">Date de l'evenement</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($reserve as $reserves)
-                    <tr>
-                        <a href="accepter">
-                        <td>{{ $reserves->nomInteresse }}</td>
-                    </a>
-                        <td>{{ $reserves->nombrePlace }}</td>
-                        <td>{{ $reserves->evenement->libelle }}</td>
-                        <td>{{ $reserves->evenement->dateEvenement }}</td>
-
-
-                    </tr>
+                    {{-- @if($reserves->evenement->association_id ==auth()->guard('association')->user()->id) --}}
+                        <tr>
+                            <td>{{ $reserves->nomInteresse }}</td>
+                            <td>{{ $reserves->nombrePlace }}</td>
+                            <td>{{ $reserves->evenement->libelle }}</td>
+                            <td>{{ $reserves->evenement->dateEvenement }}</td>
+                            <td class="action-buttons">
+                                <form action="}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Accepter</button>
+                                </form>
+                                <form action="" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Refuser</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{-- @endif --}}
                 @endforeach
             </tbody>
         </table>

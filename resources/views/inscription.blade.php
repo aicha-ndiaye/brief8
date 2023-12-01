@@ -29,6 +29,9 @@
                 <input type="telephone" name="telephone" class="form-control item" id="telephone" placeholder="votre numero de telephone">
             </div>
             <div class="form-group">
+                <input type="file" name="image" class="form-control item" id="image" placeholder="photo de profil">
+            </div>
+            <div class="form-group">
                 <input type="password" name="password" class="form-control item" id="password" placeholder="mot de passe">
             </div>
             <div class="form-group">
