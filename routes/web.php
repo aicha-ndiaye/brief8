@@ -52,6 +52,8 @@ Route::post('reservation', [ReservationController::class, 'store']);
 Route::get('reservation/{id}', [ReservationController::class, 'index']);
 Route::get('listeReservation', [ReservationController::class, 'show']);
 Route::get('listeReservation', [ReservationController::class, 'listeReserv']);
+Route::post('accepter/{id}', [ReservationController::class, 'accepter'])->name('accepter');
+Route::post('refuser/{id}', [ReservationController::class, 'refuser'])->name('refuser');
 
 Route::get('/pageAdmin', function () {
     return view('pageAdmin');

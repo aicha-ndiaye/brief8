@@ -47,10 +47,29 @@ class ReservationController extends Controller
         $reserver->nombrePlace=$request->nombrePlace;
         $reserver->user_id=$request->user;
         $reserver->evenement_id=$request->evenement_id;
+
         if ($reserver->save()) {
             $user->notify(new confirmation_de_reservation());
             return redirect('/pagemsg');
         }
+    }
+
+    public function accepter($id){
+
+        $reserv=Reservation::Find($id);
+        $reserv->est_accepte=true;
+        $reserv->save();
+        return redirect()->back();
+
+    }
+    public function refuser($id){
+        $reserv= new Reservation();
+        $reserver=Reservation::Find($id);
+        $reserver->est_accepte=false;
+        // $reserver->notify(new confirmation_de_reservation());
+        $reserver->save();
+        return redirect()->back()->with('success','voujhodapozeiptmoj');
+
     }
 
     /**

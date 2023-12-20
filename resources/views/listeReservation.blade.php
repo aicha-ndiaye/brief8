@@ -73,13 +73,14 @@
                             <td>{{ $reserves->evenement->libelle }}</td>
                             <td>{{ $reserves->evenement->dateEvenement }}</td>
                             <td class="action-buttons">
-                                <form action="}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">Accepter</button>
-                                </form>
-                                <form action="" method="POST">
+
+                                <form action="{{route('refuser',['id'=>$reserves->id])}}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Refuser</button>
+                                </form>
+                                <form action="{{route('accepter',['id'=>$reserves->id])}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Accepter</button>
                                 </form>
                             </td>
                         </tr>

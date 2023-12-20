@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nomInteresse');
             $table->integer('nombrePlace');
+            $table->boolean('est_accepte')->default(true);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('evenement_id')->constrained()->onDelete('cascade');
             $table->timestamps();
